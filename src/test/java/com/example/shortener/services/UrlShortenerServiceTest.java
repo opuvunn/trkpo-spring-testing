@@ -39,7 +39,7 @@ class UrlShortenerServiceTest {
 
     @InjectMocks
     private UrlShortenerService service;
-
+    //Проверяет, что при ошибочном URL сервис выбрасывает InvalidUrlException
     @Test
     void shortenThrowsInvalidUrlExceptionWhenValidationFails() {
         String url = "bad-url";
@@ -52,7 +52,7 @@ class UrlShortenerServiceTest {
                 () -> service.shorten(url)
         );
     }
-
+    //Проверяет успешный поиск по shortKey, увеличение счётчика переходов и сохранение обновлённой записи
     @Test
     void resolveReturnsRedirectionAndIncrementsUsageCount() {
         Redirection redirection =
@@ -67,7 +67,7 @@ class UrlShortenerServiceTest {
         assertEquals(1, result.getUsageCount());
         verify(repo).save(redirection);
     }
-
+    //Проверяет наличие исключения если ссылка по shortKey не найдена
     @Test
     void resolveThrowsExceptionWhenRedirectionNotFound() {
         when(repo.findByShortKey("missing"))
@@ -78,7 +78,7 @@ class UrlShortenerServiceTest {
                 () -> service.resolve("missing")
         );
     }
-
+    //Проверяет успешный поиск ссылки по secretKey
     @Test
     void findBySecretKeyReturnsRedirectionWhenFound() {
         Redirection redirection =
@@ -91,7 +91,7 @@ class UrlShortenerServiceTest {
 
         assertSame(redirection, result);
     }
-
+    //Проверяет исключение, если ссылка по secretKey не найдена
     @Test
     void findBySecretKeyThrowsExceptionWhenNotFound() {
         when(repo.findBySecretKey("missing"))
@@ -102,7 +102,7 @@ class UrlShortenerServiceTest {
                 () -> service.findBySecretKey("missing")
         );
     }
-
+    //Проверяет, что найденная по secretKey ссылка передаётся репозиторию на удаление
     @Test
     void deleteRedirectionDeletesFoundRedirection() {
         Redirection redirection =
@@ -115,7 +115,7 @@ class UrlShortenerServiceTest {
 
         verify(repo).delete(redirection);
     }
-
+    //Проверяет успешное сокращение валидного URL, сохранение записи и возврат shortUrl и secretKey
     @Test
     void shortenReturnsShortUrlAndSecretKeyWhenUrlIsValid() {
         String url = "https://example.com";

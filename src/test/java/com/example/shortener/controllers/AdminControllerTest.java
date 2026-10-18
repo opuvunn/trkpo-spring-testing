@@ -25,7 +25,7 @@ class AdminControllerTest {
 
     @Autowired
     private RedirectionRepo repo;
-
+    //Проверяет, что по secretKey через GET-запрос возвращаются дата создания ссылки и количество переходов
     @Test
     void getStatsReturnsCreationDateAndUsageCount() throws Exception {
         String shortKey = UUID.randomUUID().toString();
@@ -46,7 +46,7 @@ class AdminControllerTest {
 
         repo.delete(redirection);
     }
-
+    //Проверяет, что DELETE-запрос по secretKey действительно удаляет ссылку из базы
     @Test
     void deleteRedirectionDeletesBySecretKey() throws Exception {
         String shortKey = UUID.randomUUID().toString();

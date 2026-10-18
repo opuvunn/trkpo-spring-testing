@@ -23,7 +23,7 @@ class RedirectControllerTest {
 
     @Autowired
     private RedirectionRepo repo;
-
+    //Проверяет, что переход по shortKey возвращает код 302 и исходный адрес в заголовке Location
     @Test
     void redirectReturns302AndLocationHeader() throws Exception {
         String shortKey = UUID.randomUUID().toString();

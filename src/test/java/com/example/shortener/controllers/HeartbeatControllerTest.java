@@ -19,7 +19,7 @@ class HeartbeatControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
+    //Проверяет что HTTP запрос проходит успешно
     @Test
     void ping() throws Exception {
 
